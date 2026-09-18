@@ -83,11 +83,11 @@ const RegisterPage = () => {
     };
 
     return (
-        <div className="min-h-screen w-full flex flex-col lg:flex-row bg-white font-['Poppins'] relative">
+        <div className="min-h-screen w-full flex flex-col lg:flex-row bg-white font-['Montserrat'] relative">
             <LanguageSwitcher />
 
             {/* Nửa bên trái: Khu vực hình ảnh minh họa */}
-            <div className="w-full lg:w-1/2 flex flex-col items-center justify-center p-8 lg:p-12 relative min-h-[40vh] lg:min-h-screen">
+            <div className="hidden lg:flex w-full lg:w-1/2 flex-col items-center justify-center p-8 lg:p-12 relative min-h-screen">
                 <img
                     className="w-full max-w-xl object-contain mb-8 z-10"
                     src="/Pigit_full.png"
@@ -96,15 +96,16 @@ const RegisterPage = () => {
             </div>
 
             {/* Nửa bên phải: Khu vực Form đăng ký */}
-            <div className="w-full lg:w-1/2 bg-[#0F6447] lg:rounded-l-[150px] flex items-center justify-center p-6 lg:p-12">
+            <div className="w-full lg:w-1/2 flex items-center justify-center p-4 lg:p-0 min-h-screen lg:min-h-0">
+                <div className="w-full h-full min-h-[calc(100vh-2rem)] lg:min-h-screen bg-[#0F6447] rounded-[40px] lg:rounded-none lg:rounded-l-[150px] flex items-center justify-center p-6 lg:p-12">
 
                 {/* Khung (Card) màu trắng chứa Form */}
-                <div className="w-full max-w-lg bg-white shadow-2xl rounded-[40px] lg:rounded-[50px] p-8 lg:p-12 flex flex-col gap-6 relative z-20">
+                <div className="w-full max-w-lg bg-white shadow-2xl rounded-[30px] lg:rounded-[50px] p-6 sm:p-8 lg:p-12 flex flex-col gap-6 relative z-20">
 
                     {/* Tiêu đề */}
-                    <div className="text-center flex flex-col gap-1">
-                        <h1 className="text-4xl lg:text-[50px] font-semibold text-black leading-tight">{t('register_title')}</h1>
-                        <p className="text-lg font-medium text-black">{t('register_subtitle')}</p>
+                    <div className="text-center flex flex-col gap-1 lg:gap-2">
+                        <p className="text-sm sm:text-base lg:text-xl font-bold text-black">{t('register_subtitle')}</p>
+                        <h1 className="text-4xl lg:text-[50px] font-bold text-black leading-tight">{t('register_title')}</h1>
                     </div>
 
                     <form className="flex flex-col gap-5 w-full" onSubmit={handleSubmit}>
@@ -112,7 +113,7 @@ const RegisterPage = () => {
                         {/* Input First Name & Last Name */}
                         <div className="flex flex-col sm:flex-row gap-5">
                             <div className="flex flex-col gap-1 flex-1">
-                                <label className="text-base lg:text-lg font-medium text-black">{t('first_name_label')}</label>
+                                <label className="text-sm sm:text-base lg:text-xl font-bold text-black">{t('first_name_label')}</label>
                                 <input
                                     type="text"
                                     name="firstName"
@@ -124,7 +125,7 @@ const RegisterPage = () => {
                                 {errors.firstName && <span className="text-red-500 text-sm mt-1">{errors.firstName}</span>}
                             </div>
                             <div className="flex flex-col gap-1 flex-1">
-                                <label className="text-base lg:text-lg font-medium text-black">{t('last_name_label')}</label>
+                                <label className="text-sm sm:text-base lg:text-xl font-bold text-black">{t('last_name_label')}</label>
                                 <input
                                     type="text"
                                     name="lastName"
@@ -139,7 +140,7 @@ const RegisterPage = () => {
 
                         {/* Input User Name */}
                         <div className="flex flex-col gap-1">
-                            <label className="text-base lg:text-lg font-medium text-black">{t('user_name_label')}</label>
+                            <label className="text-sm sm:text-base lg:text-xl font-bold text-black">{t('user_name_label')}</label>
                             <input
                                 type="text"
                                 name="userName"
@@ -153,7 +154,7 @@ const RegisterPage = () => {
 
                         {/* Input Email */}
                         <div className="flex flex-col gap-1">
-                            <label className="text-base lg:text-lg font-medium text-black">{t('email_label')}</label>
+                            <label className="text-sm sm:text-base lg:text-xl font-bold text-black">{t('email_label')}</label>
                             <input
                                 type="email"
                                 name="email"
@@ -167,7 +168,7 @@ const RegisterPage = () => {
 
                         {/* Input Password */}
                         <div className="flex flex-col gap-1">
-                            <label className="text-base lg:text-lg font-medium text-black">{t('password_label')}</label>
+                            <label className="text-sm sm:text-base lg:text-xl font-bold text-black">{t('password_label')}</label>
                             <div className="relative w-full">
                                 <input
                                     type={showPassword ? "text" : "password"}
@@ -199,7 +200,7 @@ const RegisterPage = () => {
 
                         {/* Input Confirm Password */}
                         <div className="flex flex-col gap-1">
-                            <label className="text-base lg:text-lg font-medium text-black">{t('confirm_password_label')}</label>
+                            <label className="text-sm sm:text-base lg:text-xl font-bold text-black">{t('confirm_password_label')}</label>
                             <div className="relative w-full">
                                 <input
                                     type={showConfirmPassword ? "text" : "password"}
@@ -230,9 +231,9 @@ const RegisterPage = () => {
                         </div>
 
                         {/* Đã có tài khoản? */}
-                        <div className="flex justify-center text-sm lg:text-base font-medium mt-1">
+                        <div className="flex justify-center text-xs sm:text-sm lg:text-base font-medium mt-1">
                             <div className="text-[#8D8D8D]">
-                                {t('already_have_account')} <Link to="/login" className="text-[#0E6347] hover:underline cursor-pointer">{t('log_in_link')}</Link>
+                                {t('already_have_account')} <Link to="/login" className="text-[#0E6347] font-bold hover:underline cursor-pointer">{t('log_in_link')}</Link>
                             </div>
                         </div>
 
@@ -257,7 +258,7 @@ const RegisterPage = () => {
                         {/* Nút Google */}
                         <button
                             type="button"
-                            className="flex-1 h-[50px] bg-white border border-gray-300 hover:bg-gray-50 rounded-[20px] flex items-center justify-center gap-2 transition-colors shadow-sm"
+                            className="flex-1 h-[50px] lg:h-[60px] bg-white border border-gray-300 hover:bg-gray-50 rounded-[20px] flex items-center justify-center gap-2 transition-colors shadow-sm"
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" className="w-5 h-5">
                                 <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z" />
@@ -265,21 +266,22 @@ const RegisterPage = () => {
                                 <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z" />
                                 <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z" />
                             </svg>
-                            <span className="text-gray-700 font-medium text-base">{t('google_btn')}</span>
+                            <span className="text-gray-700 font-bold text-sm sm:text-base lg:text-lg">{t('google_btn')}</span>
                         </button>
 
                         {/* Nút Facebook */}
                         <button
                             type="button"
-                            className="flex-1 h-[50px] bg-[#1877F2] hover:bg-[#166fe5] rounded-[20px] flex items-center justify-center gap-2 transition-colors shadow-sm"
+                            className="flex-1 h-[50px] lg:h-[60px] bg-[#1877F2] hover:bg-[#166fe5] rounded-[20px] flex items-center justify-center gap-2 transition-colors shadow-sm"
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" className="w-6 h-6">
                                 <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
                             </svg>
-                            <span className="text-white font-medium text-base">{t('facebook_btn')}</span>
+                            <span className="text-white font-bold text-sm sm:text-base lg:text-lg">{t('facebook_btn')}</span>
                         </button>
                     </div>
 
+                </div>
                 </div>
             </div>
         </div>
