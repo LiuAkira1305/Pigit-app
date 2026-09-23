@@ -1,11 +1,30 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from '../components/LanguageSwitcher';
+import { mockUsers } from '../data/user_test';
 
 const LoginPage = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const { t } = useTranslation();
+    const navigate = useNavigate();
+
+    const handleLogin = (e) => {
+        e.preventDefault();
+        
+        // Tìm user trong danh sách mockUsers
+        const user = mockUsers.find(u => u.email === email && u.password === password);
+
+        if (user) {
+            // Lưu thông tin user vào localStorage để các trang khác có thể dùng
+            localStorage.setItem('currentUser', JSON.stringify(user));
+            navigate('/admin');
+        } else {
+            alert(t('login_failed') || 'Invalid credentials. Vui lòng kiểm tra lại thông tin.');
+        }
+    };
 
     return (
         <div className="min-h-screen w-full flex flex-col lg:flex-row bg-white font-['Montserrat'] relative">
@@ -32,12 +51,14 @@ const LoginPage = () => {
                         <h1 className="text-4xl lg:text-[55px] font-bold text-black leading-tight">{t('login_title')}</h1>
                     </div>
 
-                    <form className="flex flex-col gap-5 lg:gap-6 w-full">
+                    <form className="flex flex-col gap-5 lg:gap-6 w-full" onSubmit={handleLogin}>
                         <div className="flex flex-col gap-1 lg:gap-2">
                             <label className="text-sm sm:text-base lg:text-xl font-bold text-black">{t('email_label')}</label>
                             <input
-                                type="email"
+                                type="text"
                                 placeholder={t('email_placeholder')}
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                                 className="w-full h-[50px] rounded-xl lg:rounded-[20px] border border-[#666666] px-4 text-base lg:text-lg text-gray-700 outline-none focus:border-[#0F6447] focus:ring-1 focus:ring-[#0F6447] transition-all"
                             />
                         </div>
@@ -48,6 +69,8 @@ const LoginPage = () => {
                                 <input
                                     type={showPassword ? "text" : "password"}
                                     placeholder={t('password_placeholder')}
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
                                     className="w-full h-[50px] rounded-xl lg:rounded-[20px] border border-[#666666] px-4 pr-12 text-base lg:text-lg text-gray-700 outline-none focus:border-[#0F6447] focus:ring-1 focus:ring-[#0F6447] transition-all"
                                 />
                                 <button
@@ -77,7 +100,7 @@ const LoginPage = () => {
                         </div>
 
                         <button
-                            type="button"
+                            type="submit"
                             className="w-full h-[50px] bg-[#589B3D] hover:bg-[#4d8635] text-white rounded-[20px] text-lg lg:text-xl font-medium shadow-lg transition-colors mt-2"
                         >
                             {t('login_btn')}

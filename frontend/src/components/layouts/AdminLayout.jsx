@@ -7,18 +7,13 @@ import Header from './Header';
 
 const AdminLayout = () => {
     return (
-        <div className="flex h-screen bg-gray-100">
-            {/* Thanh Menu bên trái - Luôn đứng im */}
+        <div className="flex h-screen bg-gray-50 overflow-hidden font-['Inter']">
             <Sidebar />
-
-            {/* Khu vực bên phải */}
-            <div className="flex-1 flex flex-col overflow-hidden">
-                {/* Thanh Tiêu đề phía trên - Luôn đứng im */}
+            <div className="flex-1 flex flex-col min-w-0">
                 <Header />
-
-                {/* NỘI DUNG THAY ĐỔI: Chỗ này sẽ hiển thị trang Quản lý Heo hoặc Kho hàng... */}
-                <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-6">
-                    <Outlet /> {/* Component Outlet làm nhiệm vụ "hứng" nội dung của từng trang */}
+                {/* Khu vực hiển thị nội dung từng trang (Dashboard, Farm, HR...) */}
+                <main className="flex-1 overflow-x-hidden overflow-y-auto p-6">
+                    <Outlet />
                 </main>
             </div>
         </div>
